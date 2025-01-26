@@ -2,5 +2,3 @@
 /node_modules
 .env
 desktop.ini
-package.json
-package-lock.json
