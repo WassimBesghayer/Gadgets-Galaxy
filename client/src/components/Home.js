@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useSelector } from 'react-redux';
+import ProductCard from './ProductCard';
+import AddProduct from './AddProduct';
 
 
-function Home() {
+function Home({ping, setping}) {
+    const [category, setcategory] = useState("all")
+    const products=useSelector((state)=>state.product.productList); // for mapping the products
+    console.log(products)
   return (
-    <div>
+    <div className='home-div'>
         <div
             id="carouselExampleAutoplaying"
             className="carousel slide"
@@ -42,14 +48,21 @@ function Home() {
         </div>
 
         <div className='all-products'>
-            <h1>Discover our products</h1>
+            <h1 className='headline'>Discover our products</h1>
             <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas, ratione! Quia animi autem tenetur ab libero doloribus? Ipsa nulla aliquam laboriosam excepturi temporibus. Culpa, aspernatur harum veritatis iure commodi inventore.</h3>
+        <AddProduct ping={ping} setping={setping}/>
             <div className='products-icons'>
-                <img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F5a452598546ddca7e1fcbc80.png&f=1&nofb=1&ipt=b58dd40763d3b6b180d545f0abb5672585ae172f836f97688bb1c1b8f2d8f8df&ipo=images'/>
-                <img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Fsmartwatch-icon%2Fsmartwatch-icon-18.jpg&f=1&nofb=1&ipt=f0cde4480674382b841da6bf6943055c52f8742744fe27ddc2726712cb37bb80&ipo=images'/>
-                <img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Farduino-icon%2Farduino-icon-20.jpg&f=1&nofb=1&ipt=e99eeaf94b102fc1bfd2cbb55cd69befd0b1b689c47d40e7541f03ca6feb5740&ipo=images'/>
-                <img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fopengameart.org%2Fsites%2Fdefault%2Ffiles%2FpsController.png&f=1&nofb=1&ipt=a209eaf258bc9a726b91dcc96849829ca9f43c46fca2142b96f5ce48ae1eb566&ipo=images'/>
+                <button onClick={()=>setcategory("all")}><img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.aYRsxlRHcoa4JL4uE7VPHQHaHa%26pid%3DApi&f=1&ipt=e54510565980182ddb98b06e470dbe01ce63227040ee8416c339700c805ba98a&ipo=images'/></button>
+                <button onClick={()=>setcategory("Smart Phones")}><img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fassets.stickpng.com%2Fimages%2F5a452598546ddca7e1fcbc80.png&f=1&nofb=1&ipt=b58dd40763d3b6b180d545f0abb5672585ae172f836f97688bb1c1b8f2d8f8df&ipo=images'/></button>
+                <button onClick={()=>setcategory("Smart Watches")}><img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Fsmartwatch-icon%2Fsmartwatch-icon-18.jpg&f=1&nofb=1&ipt=f0cde4480674382b841da6bf6943055c52f8742744fe27ddc2726712cb37bb80&ipo=images'/></button>
+                <button onClick={()=>setcategory("Embedded Systems")}><img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Farduino-icon%2Farduino-icon-20.jpg&f=1&nofb=1&ipt=e99eeaf94b102fc1bfd2cbb55cd69befd0b1b689c47d40e7541f03ca6feb5740&ipo=images'/></button>
+                <button onClick={()=>setcategory("Remote Controllers")}><img className='icon' src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fopengameart.org%2Fsites%2Fdefault%2Ffiles%2FpsController.png&f=1&nofb=1&ipt=a209eaf258bc9a726b91dcc96849829ca9f43c46fca2142b96f5ce48ae1eb566&ipo=images'/></button>
             </div>
+        </div>
+        <div className='products-display'>
+        {category==="all"?products.map((el)=><ProductCard product={el}/>):
+        products?.filter((el)=>el.category===category).map((el)=><ProductCard product={el}/>)} 
+        {/* mapping, filtering, then filling each card */}
         </div>
     </div>
   )
