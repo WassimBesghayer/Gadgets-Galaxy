@@ -9,5 +9,5 @@ const productSchema = new schema({
     category:{type:String, default:"all"}
 });
 
-const Product = mongoose.model('Product',productschema);
+const Product = mongoose.model('Product',productSchema);
 module.exports=Product;
