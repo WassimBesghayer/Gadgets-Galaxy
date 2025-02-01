@@ -23,8 +23,7 @@ export const addproduct = createAsyncThunk("product/add",async(newproduct)=>{
     catch (error) {
         console.log(error)
     }
-}
-)
+})
 
 
 // deleting a product
@@ -36,8 +35,18 @@ export const deleteproduct = createAsyncThunk("product/delete",async(id)=>{
   catch (error) {
       console.log(error)
   }
-}
-)
+})
+
+// editing a product
+export const editproduct = createAsyncThunk("product/edit",async({id, edited})=>{
+  try {
+      let result=axios.put(`http://localhost:5000/product/${id}`, edited);
+      return result
+  }
+  catch (error) {
+      console.log(error)
+  }
+})
 
 export const productSlice = createSlice({
   name: 'product',
@@ -69,6 +78,28 @@ export const productSlice = createSlice({
         state.status = "success";
       })
       .addCase(addproduct.rejected, (state) => {
+        state.status = "fail";
+      })
+
+      // deleting a product
+      .addCase(deleteproduct.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(deleteproduct.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(deleteproduct.rejected, (state) => {
+        state.status = "fail";
+      })
+
+      // editing a product
+      .addCase(editproduct.pending, (state) => {
+        state.status = "pending";
+      })
+      .addCase(editproduct.fulfilled, (state, action) => {
+        state.status = "success";
+      })
+      .addCase(editproduct.rejected, (state) => {
         state.status = "fail";
       });
   },
