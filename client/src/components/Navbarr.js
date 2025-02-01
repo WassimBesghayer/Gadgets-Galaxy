@@ -34,9 +34,9 @@ function Navbarr() {
             <Nav.Link href="#"><Link to="/Orders">Orders</Link></Nav.Link>
           </Nav>
           <Form className="d-flex">
-            <Form.Control
+            <Form.Control style={{width: '250px'}}
               type="search"
-              placeholder="Search"
+              placeholder="Looking for something ?"
               className="me-2"
               aria-label="Search"
             />
