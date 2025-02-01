@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import ProductCard from './ProductCard';
 import AddProduct from './AddProduct';
 
-
 function Home({ping, setping}) {
     const [category, setcategory] = useState("all")
     const products=useSelector((state)=>state.product.productList); // for mapping the products
@@ -60,8 +59,8 @@ function Home({ping, setping}) {
             </div>
         </div>
         <div className='products-display'>
-        {category==="all"?products.map((el)=><ProductCard product={el}/>):
-        products?.filter((el)=>el.category===category).map((el)=><ProductCard product={el}/>)} 
+        {category==="all"?products.map((el)=><ProductCard product={el} ping={ping} setping={setping}/>):
+        products?.filter((el)=>el.category===category).map((el)=><ProductCard product={el} ping={ping} setping={setping}/>)} 
         {/* mapping, filtering, then filling each card */}
         </div>
     </div>
