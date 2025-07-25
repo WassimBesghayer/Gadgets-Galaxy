@@ -7,10 +7,19 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "back": "nodemon server.js",
     "front": "cd client & npm start",
-    "start": "concurrently \"npm run back\" \"npm run front\""
+    "dev": "concurrently \"npm run back\" \"npm run front\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WassimBesghayer/Gadgets-Galaxy.git"
   },
   "author": "Wassim BESGHAYER",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WassimBesghayer/Gadgets-Galaxy/issues"
+  },
+  "homepage": "https://github.com/WassimBesghayer/Gadgets-Galaxy#readme",
+
   "dependencies": {
     "concurrently": "^9.1.2",
     "cors": "^2.8.5",
